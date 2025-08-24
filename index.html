@@ -1,0 +1,2539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIES College of Commerce & Economics</title>
+  <style>
+    :root {
+      --brand: #ff8c5a;
+      --brand-2: #f0f8ff;
+      --blue-accent: #4a90e2;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; line-height: 1.6; font-size: 15px; }
+
+    /* Top Bar */
+    .topbar {
+      background: var(--brand);
+      color: white;
+      padding: 5px 10px;
+      font-size: 5%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .topbar a { color: #fff; margin-left: 15px; text-decoration: none; }
+
+    /* Navbar */
+    nav {
+      width: 100%;
+  background: #f5f5dc;
+  border-bottom: 2px solid var(--blue-accent);
+  padding: 10px 0; /* remove left-right padding from nav itself */
+  position: relative;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+    }
+    
+    nav:hover {
+      box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+      transform: translateY(-1px);
+    }
+    .nav-container {
+  
+  margin: 0 auto;       /* Centers content */
+  padding: 0 20px;      /* Small inner spacing */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--brand);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .logo:hover {
+      transform: scale(1.05);
+      text-shadow: 3px 3px 8px rgba(0,0,0,0.4);
+      color: #fff;
+    }
+
+    .menu {
+     display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+    }
+    .menu li {
+      position: relative;
+    }
+    .menu > li {
+      margin: 0 15px;
+    }
+    .menu a {
+      text-decoration: none;
+      color: var(--brand);
+      font-weight: bold;
+      padding: 8px 12px;
+      display: block;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .menu a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .menu a:hover {
+      background: var(--blue-accent);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    
+    .menu a:hover::before {
+      left: 100%;
+    }
+
+    /* Dropdown */
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      min-width: 180px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      z-index: 999;
+      border-radius: 8px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+    }
+    .dropdown li { margin: 0; }
+    .dropdown a { 
+      font-weight: normal; 
+      color: #333; 
+      padding: 12px 18px;
+      border-bottom: 1px solid #eee;
+      transition: all 0.3s ease;
+      transform: translateX(0);
+    }
+    .dropdown a:hover {
+      background: var(--brand-2);
+      color: var(--brand);
+      transform: translateX(5px);
+      padding-left: 23px;
+    }
+    .menu li:hover > .dropdown {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    .hamburger:hover {
+      background: rgba(255,255,255,0.1);
+      transform: scale(1.1);
+    }
+    .hamburger span {
+      height: 3px;
+      width: 25px;
+      background: var(--brand);
+      margin: 3px 0;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+    .hamburger:hover span:nth-child(1) {
+      transform: translateY(-2px);
+    }
+    .hamburger:hover span:nth-child(3) {
+      transform: translateY(2px);
+    }
+
+    /* Mobile menu */
+    @media (max-width: 768px) {
+      .menu {
+        position: absolute;
+        top: 60px;
+        left: -100%;
+        flex-direction: column;
+        background: #f5f5dc;
+        width: 100%;
+        transition: 0.3s;
+        border-top: 2px solid var(--blue-accent);
+      }
+      .menu.active {
+        left: 0;
+      }
+      .menu li {
+        margin: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+      }
+      .menu li:hover > .dropdown {
+        position: static;
+        box-shadow: none;
+        background: rgba(255,255,255,0.1);
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* Page Content */
+    .page {
+      display: none;
+    }
+    .page.active {
+      display: block;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--blue-accent) 100%);
+      height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+      text-align: center;
+      padding: 20px;
+    }
+    .hero h1 { font-size: 42px; margin-bottom: 10px; }
+    .hero p { font-size: 18px; }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--blue-accent) 100%);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+    }
+    .page-header h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    .page-header p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    /* Back Arrow */
+    .back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .back-arrow:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateX(-3px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .back-arrow:active {
+      transform: translateX(-1px);
+    }
+
+    /* Section */
+    section {
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    h2 {
+      color: var(--brand);
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--brand);
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #f5f5dc;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border: 3px solid #e6d7a3;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      background: #f5f5dc;
+      border: 3px solid var(--brand);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+    .card h3 {
+      color: var(--brand);
+      margin-bottom: 10px;
+    }
+    .card .date {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: var(--brand);
+      color: white;
+    }
+    tr:hover {
+      background: var(--brand-2);
+    }
+
+    /* Forms */
+    .form-container {
+      background: var(--brand-2);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 20px auto;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--brand);
+    }
+    .submit-btn {
+      background: var(--brand);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .submit-btn:hover {
+      background: var(--blue-accent);
+    }
+
+    /* Quick Links */
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .quick-links a {
+      padding: 12px 24px;
+      background: var(--brand);
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .quick-links a:hover {
+      background: var(--blue-accent);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--brand);
+      color: white;
+      padding: 40px 20px 20px;
+      margin-top: 40px;
+    }
+    .footer-content {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .footer-section h3 {
+      margin-bottom: 15px;
+      color: white;
+    }
+    .footer-section a {
+      color: #ccc;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .footer-section a:hover {
+      color: white;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--blue-accent);
+      color: #ccc;
+    }
+
+    /* Course Cards */
+    .course-card {
+      cursor: pointer;
+      position: relative;
+    }
+    .course-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .click-hint {
+      color: var(--blue-accent);
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: 10px;
+      opacity: 0.8;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      backdrop-filter: blur(5px);
+    }
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      position: relative;
+      animation: modalSlideIn 0.3s ease-out;
+    }
+    @keyframes modalSlideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      position: absolute;
+      right: 20px;
+      top: 15px;
+    }
+    .close:hover {
+      color: var(--brand);
+    }
+    .course-detail h2 {
+      color: var(--brand);
+      margin-bottom: 15px;
+      border-bottom: 2px solid var(--brand);
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .course-detail h3 {
+      color: var(--blue-accent);
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    .course-detail ul {
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+    .course-detail li {
+      margin-bottom: 5px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1, .page-header h1 { font-size: 28px; }
+      .hero p, .page-header p { font-size: 16px; }
+      .topbar { 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 2px; 
+      }
+      section { padding: 30px 15px; }
+      .grid { grid-template-columns: 1fr; }
+      .form-container { padding: 20px; margin: 20px 15px; }
+      .modal-content {
+        margin: 10% auto;
+        width: 95%;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- Navigation -->
+   <div class="logo" onclick="showPage('home')"><img src="sies_logo.jpg" height="70px" ></div>
+  <nav>
+    <div class="nav-container">
+      
+      <ul class="menu" id="menu">
+        <li><a onclick="showPage('home')">Home</a></li>
+        <li>
+          <a>About Us</a>
+          <ul class="dropdown">
+            <li><a onclick="showPage('history')">History</a></li>
+            <li><a onclick="showPage('management')">Management</a></li>
+            <li><a onclick="showPage('administration')">Administration</a></li>
+            <li><a onclick="showPage('institutional-goals')">Institutional Goals</a></li>
+            <li><a onclick="showPage('floor-plan')">Floor Plan</a></li>
+            <li><a onclick="showPage('facilities')">Facilities</a></li>
+            <li><a onclick="showPage('accolades')">Accolades</a></li>
+            <li><a onclick="showPage('what-they-say')">What They Say</a></li>
+            <li><a onclick="showPage('organogram')">Organogram</a></li>
+          </ul>
+        </li>
+        <li>
+          <a>Academics</a>
+          <ul class="dropdown">
+            <li><a onclick="showPage('fee-structure')">Fee Structure</a></li>
+            <li><a onclick="showPage('courses')">Courses Offered</a></li>
+            <li><a onclick="showPage('courses-syllabus')">Courses and Syllabus</a></li>
+            <li><a onclick="showPage('program-outcomes')">Program Outcomes</a></li>
+            <li><a onclick="showPage('faculty-exchange')">Faculty Exchange Program</a></li>
+            <li><a onclick="showPage('addon-courses')">Add on/Short Term Courses</a></li>
+            <li><a onclick="showPage('bridge-courses')">Bridge Courses</a></li>
+            <li><a onclick="showPage('academic-calendar')">Academic Calendar</a></li>
+            <li><a onclick="showPage('annual-reports')">Annual Reports</a></li>
+          </ul>
+        </li>
+        <li><a onclick="showPage('admissions')">Admissions</a></li>
+        <li>
+          <a>Research</a>
+          <ul class="dropdown">
+            <li><a onclick="showPage('research-committee')">Research Committee</a></li>
+            <li><a onclick="showPage('research-policies')">Policies</a></li>
+            <li><a onclick="showPage('major-minor-projects')">Major/Minor Projects</a></li>
+            <li><a onclick="showPage('paper-publications')">Paper Publications</a></li>
+            <li><a onclick="showPage('books-publications')">Books and Chapter Publications</a></li>
+            <li><a onclick="showPage('research-organisation')">Research Organisation</a></li>
+            <li><a onclick="showPage('research-scholars')">Research Scholars (PhD)</a></li>
+            <li><a onclick="showPage('research-activities')">Research Activities</a></li>
+          </ul>
+        </li>
+        <li>
+          <a>Events</a>
+          <ul class="dropdown">
+            <li><a onclick="showPage('departmental-events')">Departmental Events</a></li>
+            <li><a onclick="showPage('seminars')">Seminars/Conferences</a></li>
+            <li><a onclick="showPage('committee-events')">Committee Events</a></li>
+            <li><a onclick="showPage('photo-gallery')">Photo Gallery</a></li>
+            <li><a onclick="showPage('capacity-development')">Capacity Development and Skills Enhancement</a></li>
+            <li><a onclick="showPage('career-guidance-events')">Career Guidance</a></li>
+            <li><a onclick="showPage('gender-sensitization')">Gender Sensitization Plan</a></li>
+            <li><a onclick="showPage('entrepreneurship-cell')">Entrepreneurship Cell</a></li>
+          </ul>
+        </li>
+        <li>
+          <a>IQAC</a>
+          <ul class="dropdown">
+            <li><a onclick="showPage('iqac-committee')">IQAC Committee</a></li>
+            <li><a onclick="showPage('naac-certificates')">NAAC Certificates</a></li>
+            <li><a onclick="showPage('aqar')">AQAR</a></li>
+            <li><a onclick="showPage('ssr')">SSR</a></li>
+            <li><a onclick="showPage('student-satisfaction-survey')">Student Satisfaction Survey Reports</a></li>
+            <li><a onclick="showPage('minutes-meetings')">Minutes of Meetings</a></li>
+            <li><a onclick="showPage('strategic-plan')">Strategic Plan & Development</a></li>
+            <li><a onclick="showPage('best-practices')">Best Practices</a></li>
+            <li><a onclick="showPage('institutional-distinctiveness')">Institutional Distinctiveness</a></li>
+          </ul>
+        </li>
+        <li>
+          <a>Staff</a>
+          <ul class="dropdown">
+            <li><a onclick="showPage('degree-staff')">Degree College Staff</a></li>
+            <li><a onclick="showPage('non-teaching-staff')">Non-Teaching Staff</a></li>
+          </ul>
+        </li>
+        <li>
+          <a>Achievements</a>
+          <ul class="dropdown">
+            <li><a onclick="showPage('student-achievements')">Student Achievements</a></li>
+            <li><a onclick="showPage('staff-achievements')">Staff Achievements</a></li>
+          </ul>
+        </li>
+        <li>
+          <a>Welfare Schemes</a>
+          <ul class="dropdown">
+            <li><a onclick="showPage('career-counselling')">Career Counselling</a></li>
+            <li><a onclick="showPage('personal-counselling')">Personal Counselling</a></li>
+            <li><a onclick="showPage('bridge-courses-welfare')">Bridge Courses</a></li>
+            <li><a onclick="showPage('yoga-meditation')">Yoga and Meditation</a></li>
+            <li><a onclick="showPage('scholarships')">Scholarships</a></li>
+          </ul>
+        </li>
+        <!--<li><a onclick="showPage('magazine')">Magazine</a></li>-->
+        <li><a onclick="showPage('contact')">Contact</a></li>
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HOME PAGE -->
+  <div id="home" class="page active">
+    <div class="hero">
+      <div>
+        <h1>SIES College of Commerce & Economics</h1>
+        <p>Excellence in Commerce & Economics Education</p>
+      </div>
+    </div>
+
+    <section>
+      <h2>About Our College</h2>
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <p>SIES College of Commerce & Economics is committed to providing comprehensive education that combines academic excellence with practical skills, preparing our students for successful careers in commerce, economics, and related fields.</p>
+        <br>
+        <p>Our college is affiliated with the University of Mumbai and offers undergraduate and postgraduate programs designed to meet the evolving needs of the business world.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Latest Announcements</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>ALL SFC COURSES TIME TABLE OF TERM-II EXAM MARCH APRIL 2025</h3>
+          <div class="date">February 15, 2025</div>
+          <p>Time table for Term-II examinations for all Self-Financed Courses (SFC) scheduled for March-April 2025 is now available. Students can download from the official portal.</p>
+        </div>
+        <div class="card">
+          <h3>TIME TABLE OF B.COM TERM II EXAM MARCH APRIL 2025</h3>
+          <div class="date">February 12, 2025</div>
+          <p>B.Com Term-II examination timetable for March-April 2025 has been released. All B.Com students are advised to check their exam schedule and prepare accordingly.</p>
+        </div>
+        <div class="card">
+          <h3>ADMISSIONS OPEN FOR UNDERGRADUATE, POSTGRADUATE & JUNIOR COLLEGE</h3>
+          <div class="date">February 5, 2025</div>
+          <p>Admissions are now open for all programs including Junior College, Undergraduate courses (B.Com, BMS, B.Sc IT, etc.) and Postgraduate courses (M.Com, M.Sc). Apply now for Academic Year 2025-26.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>College Video</h2>
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <div style="position: relative; background: linear-gradient(135deg, var(--brand) 0%, var(--blue-accent) 100%); border-radius: 15px; overflow: hidden; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(0,0,0,0.15);" onclick="openYouTubeVideo()" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; padding: 40px;">
+            <div style="text-align: center;">
+              <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; backdrop-filter: blur(10px); transition: all 0.3s ease;">
+                <div style="width: 0; height: 0; border-left: 25px solid white; border-top: 15px solid transparent; border-bottom: 15px solid transparent; margin-left: 8px;"></div>
+              </div>
+              <h3 style="margin: 0 0 10px 0; font-size: 24px;">SIES College Virtual Tour</h3>
+              <p style="margin: 0; opacity: 0.9; font-size: 16px;">Discover our campus, facilities, and academic excellence</p>
+              <p style="margin: 10px 0 0 0; font-size: 14px; opacity: 0.8;">🎬 Click to watch on YouTube</p>
+            </div>
+          </div>
+          <div style="position: absolute; top: 15px; right: 15px; background: rgba(255,0,0,0.9); color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px; font-weight: bold;">
+            ▶ YOUTUBE
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Quick Access</h2>
+      <div class="quick-links">
+        <a onclick="showPage('admissions')">Apply Now</a>
+        <a href="#results">Exam Results</a>
+        <a href="#library">Online Resources</a>
+        <a onclick="showPage('courses')">Courses</a>
+        <a onclick="showPage('contact')">Contact Us</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- HISTORY PAGE -->
+  <div id="history" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>History</h1>
+      <p>Our Legacy of Excellence in Education</p>
+    </div>
+    <section>
+      <h2>Our Heritage</h2>
+      <div style="max-width: 900px; margin: 0 auto 40px; text-align: justify; line-height: 1.8; font-size: 16px;">
+        <p>The South Indian Education Society (SIES) was established to promote the cause of education in Mumbai. SIES College of Commerce and Economics was established in May 1989 and was inaugurated by the then Vice President of India Dr. Shankar Dayal Sharma. It has now become synonymous with excellence in education.</p>
+        <br>
+        <p>The college that began as a single faculty college with 400 students and 7 lecturers, now offers under graduate and post graduate courses in Commerce, IT, Management, Banking and Insurance, Accounting and Finance to over 2,700 students supported by over 50 full-time and visiting faculty members. The Junior College with over 1,000 students and 18 teachers give the college the required strength to provide a complete package of quality higher education.</p>
+        <br>
+        <p>In a short history of a couple decades, the college has not only produced university rankers but also the achievers in sports and other cultural activities.</p>
+      </div>
+      
+      <h2>Key Milestones</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Foundation - 1989</h3>
+          <p>Established in May 1989 and inaugurated by Dr. Shankar Dayal Sharma, then Vice President of India. Started with 400 students and 7 lecturers.</p>
+        </div>
+        <div class="card">
+          <h3>Growth & Expansion</h3>
+          <p>Expanded to serve over 2,700 students with 50+ full-time and visiting faculty members across multiple disciplines.</p>
+        </div>
+        <div class="card">
+          <h3>Academic Excellence</h3>
+          <p>Produced university rankers and achievers in sports and cultural activities, establishing a reputation for holistic education.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- MANAGEMENT PAGE -->
+  <div id="management" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Management</h1>
+      <p>Leadership and Governance</p>
+    </div>
+    <section>
+      <h2>Management Committee</h2>
+      <div class="grid">
+        <div class="card">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--brand);">
+              <span style="font-size: 24px;">👤</span>
+            </div>
+          </div>
+          <h3>President</h3>
+          <p><strong>Dr. V. Shankar</strong><br>President, SIES Management Committee</p>
+        </div>
+        <div class="card">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--brand);">
+              <span style="font-size: 24px;">👤</span>
+            </div>
+          </div>
+          <h3>Working President</h3>
+          <p><strong>Shri. M. V. Ramnarayan</strong><br>Working President, SIES Management Committee</p>
+        </div>
+        <div class="card">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--brand);">
+              <span style="font-size: 24px;">👤</span>
+            </div>
+          </div>
+          <h3>Vice President</h3>
+          <p><strong>Shri. N. S. Sundar Rajan</strong><br>Vice President, SIES Management Committee</p>
+        </div>
+        <div class="card">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--brand);">
+              <span style="font-size: 24px;">👤</span>
+            </div>
+          </div>
+          <h3>Hon. Secretary</h3>
+          <p><strong>Prof. K. Venkataramani</strong><br>Hon. Secretary, SIES Management Committee</p>
+        </div>
+        <div class="card">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--brand);">
+              <span style="font-size: 24px;">👤</span>
+            </div>
+          </div>
+          <h3>Hon. Treasurer</h3>
+          <p><strong>Dr. S. V. Viswanathan</strong><br>Hon. Treasurer, SIES Management Committee</p>
+        </div>
+        <div class="card">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--brand);">
+              <span style="font-size: 24px;">👤</span>
+            </div>
+          </div>
+          <h3>Member</h3>
+          <p><strong>Shri. S. Ganesh</strong><br>Member, SIES Management Committee</p>
+        </div>
+        <div class="card">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--brand);">
+              <span style="font-size: 24px;">👤</span>
+            </div>
+          </div>
+          <h3>Member</h3>
+          <p><strong>Shri. P. Sethuraman</strong><br>Member, SIES Management Committee</p>
+        </div>
+        <div class="card">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--brand);">
+              <span style="font-size: 24px;">👤</span>
+            </div>
+          </div>
+          <h3>Member</h3>
+          <p><strong>Shri. J. Santhanam</strong><br>Member, SIES Management Committee</p>
+        </div>
+        <div class="card">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--brand);">
+              <span style="font-size: 24px;">👤</span>
+            </div>
+          </div>
+          <h3>Member</h3>
+          <p><strong>Shri. Devadasan G. Nair</strong><br>Member, SIES Management Committee</p>
+        </div>
+        <div class="card">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--brand);">
+              <span style="font-size: 24px;">👤</span>
+            </div>
+          </div>
+          <h3>Member</h3>
+          <p><strong>Shri. L. Krishnan</strong><br>Member, SIES Management Committee</p>
+        </div>
+        <div class="card">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--brand);">
+              <span style="font-size: 24px;">👤</span>
+            </div>
+          </div>
+          <h3>Member</h3>
+          <p><strong>Dr. Ramnath Subramaniam</strong><br>Member, SIES Management Committee</p>
+        </div>
+        <div class="card">
+          <div style="text-align: center; margin-bottom: 15px;">
+            <div style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; border: 3px solid var(--brand);">
+              <span style="font-size: 24px;">👤</span>
+            </div>
+          </div>
+          <h3>Member</h3>
+          <p><strong>Dr. R. Krishna Murthy</strong><br>Member, SIES Management Committee</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ADMINISTRATION PAGE -->
+  <div id="administration" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Administration</h1>
+      <p>Administrative Leadership</p>
+    </div>
+    <section>
+      <h2>Administrative Team</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>I/C Principal</h3>
+          <p><strong>Dr. Shanti Suresh</strong><br>📧 principal@siesce.edu.in</p>
+        </div>
+        <div class="card">
+          <h3>Vice Principal (Self Financing Courses)</h3>
+          <p><strong>Ms. Sangeeta Vinay Kore</strong><br>📧 viceprincipal@siesce.edu.in</p>
+        </div>
+        <div class="card">
+          <h3>Office Superintendent</h3>
+          <p><strong>Mr. Ankush Sawji</strong><br>📧 ankushs@sies.edu.in</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- FEE STRUCTURE PAGE -->
+  <div id="fee-structure" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Fee Structure</h1>
+      <p>Academic Year 2025-26</p>
+    </div>
+    <section>
+      <h2>Junior College Programs</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Annual Fee (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FYJC (Commerce) - Aided</td>
+              <td>17,230</td>
+            </tr>
+            <tr>
+              <td>SYJC (Commerce) - Aided</td>
+              <td>17,368</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Aided Undergraduate Programs</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Annual Fee (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FY B.Com</td>
+              <td>12,745</td>
+            </tr>
+            <tr>
+              <td>SY B.Com IAPM</td>
+              <td>10,544</td>
+            </tr>
+            <tr>
+              <td>SY B.Com CP</td>
+              <td>11,624</td>
+            </tr>
+            <tr>
+              <td>TY B.Com IP & TAX</td>
+              <td>8,855</td>
+            </tr>
+            <tr>
+              <td>TY B.Com IP & EXP.</td>
+              <td>7,855</td>
+            </tr>
+            <tr>
+              <td>TY B.Com IP & COMP.</td>
+              <td>9,935</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Self-Financed Undergraduate Programs</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Annual Fee (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FY BBI (Banking & Insurance)</td>
+              <td>35,337</td>
+            </tr>
+            <tr>
+              <td>SY BBI (Banking & Insurance)</td>
+              <td>31,024</td>
+            </tr>
+            <tr>
+              <td>TY BBI (Banking & Insurance)</td>
+              <td>33,399</td>
+            </tr>
+            <tr>
+              <td>FY BAF (Accounting & Finance)</td>
+              <td>35,338</td>
+            </tr>
+            <tr>
+              <td>SY BAF (Accounting & Finance)</td>
+              <td>31,024</td>
+            </tr>
+            <tr>
+              <td>TY BAF (Accounting & Finance)</td>
+              <td>33,399</td>
+            </tr>
+            <tr>
+              <td>FY BFM (Financial Markets)</td>
+              <td>35,338</td>
+            </tr>
+            <tr>
+              <td>SY BFM (Financial Markets)</td>
+              <td>31,024</td>
+            </tr>
+            <tr>
+              <td>TY BFM (Financial Markets)</td>
+              <td>33,399</td>
+            </tr>
+            <tr>
+              <td>FY B.Sc IT</td>
+              <td>42,816</td>
+            </tr>
+            <tr>
+              <td>SY B.Sc IT</td>
+              <td>44,046</td>
+            </tr>
+            <tr>
+              <td>TY B.Sc IT</td>
+              <td>45,096</td>
+            </tr>
+            <tr>
+              <td>FY BMS (Management Studies)</td>
+              <td>45,175</td>
+            </tr>
+            <tr>
+              <td>SY BMS (Management Studies)</td>
+              <td>40,715</td>
+            </tr>
+            <tr>
+              <td>TY BMS (Management Studies)</td>
+              <td>32,238</td>
+            </tr>
+            <tr>
+              <td>FY B.Sc AI (Artificial Intelligence)</td>
+              <td>51,066</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>International Programs</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Annual Fee (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FY B.Com (Hons) International Accounting</td>
+              <td>1,50,000</td>
+            </tr>
+            <tr>
+              <td>SY B.Com (Hons) International Accounting</td>
+              <td>1,50,000</td>
+            </tr>
+            <tr>
+              <td>TY B.Com (Hons) International Accounting</td>
+              <td>1,50,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Self-Financed Postgraduate Programs</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Annual Fee (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>M.Sc I Data Science</td>
+              <td>92,061</td>
+            </tr>
+            <tr>
+              <td>M.Sc II Data Science</td>
+              <td>93,761</td>
+            </tr>
+            <tr>
+              <td>M.Sc IT Part I</td>
+              <td>57,681</td>
+            </tr>
+            <tr>
+              <td>M.Sc IT Part II</td>
+              <td>60,906</td>
+            </tr>
+            <tr>
+              <td>M.Com Accounts Part I</td>
+              <td>33,877</td>
+            </tr>
+            <tr>
+              <td>M.Com Accounts Part II</td>
+              <td>34,906</td>
+            </tr>
+            <tr>
+              <td>M.Com Business Management Part I</td>
+              <td>33,877</td>
+            </tr>
+            <tr>
+              <td>M.Com Business Management Part II</td>
+              <td>34,906</td>
+            </tr>
+            <tr>
+              <td>M.Com Banking & Finance Part I</td>
+              <td>33,877</td>
+            </tr>
+            <tr>
+              <td>M.Com Banking & Finance Part II</td>
+              <td>34,906</td>
+            </tr>
+            <tr>
+              <td>M.Com Global Wealth Management Part I</td>
+              <td>75,000</td>
+            </tr>
+            <tr>
+              <td>M.Com Global Wealth Management Part II</td>
+              <td>75,000</td>
+            </tr>
+            <tr>
+              <td>M.Com Financial & Technical Analysis Part I</td>
+              <td>75,000</td>
+            </tr>
+            <tr>
+              <td>M.Com Financial & Technical Analysis Part II</td>
+              <td>75,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Research Programs</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Annual Fee (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ph.D First Year</td>
+              <td>18,080</td>
+            </tr>
+            <tr>
+              <td>Ph.D Second Year</td>
+              <td>10,500</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="background: var(--brand-2); padding: 20px; border-radius: 8px; margin-top: 30px; text-align: center;">
+        <h3 style="color: var(--brand); margin-bottom: 10px;">📋 Fee Structure Document</h3>
+        <p><strong>Academic Year:</strong> 2025-26</p>
+        <p style="font-size: 14px; color: #666; margin-top: 10px;">
+          * All fees are subject to change as per university guidelines<br>
+          * Additional charges may apply for laboratory, library, and examination fees
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <!-- COURSES PAGE -->
+  <div id="courses" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Courses Offered</h1>
+      <p>Comprehensive Academic Programs</p>
+    </div>
+    <section>
+      <h2>Undergraduate Courses</h2>
+      <div class="grid">
+        <div class="card course-card" onclick="showCourseDetails('bcom')">
+          <h3>Bachelor of Commerce (B.Com)</h3>
+          <p>Duration: 3 Years<br>A comprehensive program covering accounting, finance, economics, and business management.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+        <div class="card course-card" onclick="showCourseDetails('bms')">
+          <h3>Bachelor of Management Studies (BMS)</h3>
+          <p>Duration: 3 Years<br>Management-focused program preparing students for leadership roles in business.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+        <div class="card course-card" onclick="showCourseDetails('bscit')">
+          <h3>B.Sc. (Information Technology)</h3>
+          <p>Duration: 3 Years<br>Technology-focused program covering programming, databases, and software development.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+        <div class="card course-card" onclick="showCourseDetails('bcomaf')">
+          <h3>B.Com (Accounting & Finance)</h3>
+          <p>Duration: 3 Years<br>Specialized program focusing on advanced accounting practices and financial management.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+        <div class="card course-card" onclick="showCourseDetails('bcombi')">
+          <h3>B.Com (Banking & Insurance)</h3>
+          <p>Duration: 3 Years<br>Specialized program in banking operations, insurance, and financial services.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+        <div class="card course-card" onclick="showCourseDetails('bcomfm')">
+          <h3>B.Com (Financial Markets)</h3>
+          <p>Duration: 3 Years<br>Focus on stock markets, trading, investment analysis, and financial instruments.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+        <div class="card course-card" onclick="showCourseDetails('bcomhons')">
+          <h3>B.Com Hons. (International Accounting)</h3>
+          <p>Duration: 3 Years<br>International accounting standards, global business practices, and cross-border finance.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+        <div class="card course-card" onclick="showCourseDetails('bscai')">
+          <h3>B.Sc. (Artificial Intelligence)</h3>
+          <p>Duration: 3 Years<br>Cutting-edge program in AI, machine learning, and data science applications.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+      </div>
+      
+      <h2>Postgraduate Courses</h2>
+      <div class="grid">
+        <div class="card course-card" onclick="showCourseDetails('mcomacc')">
+          <h3>M.Com (Accountancy)</h3>
+          <p>Duration: 2 Years<br>Advanced accounting principles, auditing, and financial reporting standards.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+        <div class="card course-card" onclick="showCourseDetails('mcombf')">
+          <h3>M.Com (Banking & Finance)</h3>
+          <p>Duration: 2 Years<br>Advanced banking operations, financial markets, and investment management.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+        <div class="card course-card" onclick="showCourseDetails('mscit')">
+          <h3>M.Sc (Information Technology)</h3>
+          <p>Duration: 2 Years<br>Advanced IT concepts, software engineering, and emerging technologies.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+        <div class="card course-card" onclick="showCourseDetails('mscds')">
+          <h3>M.Sc (Data Science)</h3>
+          <p>Duration: 2 Years<br>Data analytics, machine learning, statistical modeling, and big data technologies.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+        <div class="card course-card" onclick="showCourseDetails('mcomgwm')">
+          <h3>M.Com (Global Wealth Management)</h3>
+          <p>Duration: 2 Years<br>International wealth management, portfolio optimization, and investment strategies.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+        <div class="card course-card" onclick="showCourseDetails('mcomfrta')">
+          <h3>M.Com (Financial Research & Technical Analysis)</h3>
+          <p>Duration: 2 Years<br>Financial research methods, market analysis, and technical trading strategies.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+        <div class="card course-card" onclick="showCourseDetails('mcombm')">
+          <h3>M.Com (Business Management)</h3>
+          <p>Duration: 2 Years<br>Advanced business strategies, organizational behavior, and management principles.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+      </div>
+
+      <h2>Research Programs</h2>
+      <div class="grid">
+        <div class="card course-card" onclick="showCourseDetails('phd')">
+          <h3>Ph.D. (Commerce)</h3>
+          <p>Duration: 3-5 Years<br>Research-based doctoral program in commerce, economics, and business studies.</p>
+          <div class="click-hint">Click for details →</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Course Details Modal -->
+    <div id="courseModal" class="modal" onclick="closeCourseDetails()">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close" onclick="closeCourseDetails()">&times;</span>
+        <div id="courseDetailsContent">
+          <!-- Course details will be populated here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMISSIONS PAGE -->
+  <div id="admissions" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Admissions</h1>
+      <p>Join Our Academic Community</p>
+    </div>
+    <section>
+      <h2>Admission Process</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Step 1: Application</h3>
+          <p>Fill out the online application form with all required documents and pay the application fee.</p>
+        </div>
+        <div class="card">
+          <h3>Step 2: Merit List</h3>
+          <p>Merit lists are published based on academic performance and entrance exam scores where applicable.</p>
+        </div>
+        <div class="card">
+          <h3>Step 3: Admission</h3>
+          <p>Selected candidates must complete the admission process within the specified time frame.</p>
+        </div>
+      </div>
+      
+      <div class="form-container">
+        <h3>Quick Inquiry Form</h3>
+        <form>
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" required>
+          </div>
+          <div class="form-group">
+            <label>Course Interested</label>
+            <select required>
+              <option value="">Select Course</option>
+              <option value="bcom">B.Com</option>
+              <option value="bcom-af">B.Com (A&F)</option>
+              <option value="bms">BMS</option>
+              <option value="mcom">M.Com</option>
+              <option value="mba">MBA</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea rows="4"></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Submit Inquiry</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <!-- RESEARCH COMMITTEE PAGE -->
+  <div id="research-committee" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Research Committee</h1>
+      <p>Promoting Research Excellence</p>
+    </div>
+    <section>
+      <h2>Committee Members</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- RESEARCH POLICIES PAGE -->
+  <div id="research-policies" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Research Policies</h1>
+      <p>Guidelines and Procedures</p>
+    </div>
+    <section>
+      <h2>Research Guidelines</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- DEPARTMENTAL EVENTS PAGE -->
+  <div id="departmental-events" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Departmental Events</h1>
+      <p>Academic and Cultural Activities</p>
+    </div>
+    <section>
+      <h2>Upcoming Events</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Commerce Fest 2024</h3>
+          <div class="date">January 15-17, 2024</div>
+          <p>Annual departmental festival featuring competitions, exhibitions, and cultural programs.</p>
+        </div>
+        <div class="card">
+          <h3>Business Plan Competition</h3>
+          <div class="date">February 5, 2024</div>
+          <p>Students present innovative business ideas to industry experts and investors.</p>
+        </div>
+        <div class="card">
+          <h3>Economics Symposium</h3>
+          <div class="date">March 10, 2024</div>
+          <p>Academic symposium on current economic trends and policies.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SEMINARS PAGE -->
+  <div id="seminars" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Seminars & Conferences</h1>
+      <p>Knowledge Sharing Platforms</p>
+    </div>
+    <section>
+      <h2>Recent Conferences</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>International Conference on Commerce</h3>
+          <div class="date">November 2023</div>
+          <p>Three-day international conference with participants from various countries.</p>
+        </div>
+        <div class="card">
+          <h3>Digital Economy Seminar</h3>
+          <div class="date">October 2023</div>
+          <p>Expert discussions on the impact of digitalization on business and economy.</p>
+        </div>
+        <div class="card">
+          <h3>Entrepreneurship Workshop</h3>
+          <div class="date">September 2023</div>
+          <p>Hands-on workshop for aspiring entrepreneurs and startup enthusiasts.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- IQAC COMMITTEE PAGE -->
+  <div id="iqac-committee" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>IQAC Committee</h1>
+      <p>Internal Quality Assurance Cell</p>
+    </div>
+    <section>
+      <h2>Committee Members</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Mrs. Sangeeta Kore</h3>
+          <p><strong>Co-ordinator</strong></p>
+        </div>
+        <div class="card">
+          <h3>Dr. Shanti Suresh</h3>
+          <p><strong>Teacher Member</strong></p>
+        </div>
+        <div class="card">
+          <h3>CA Prasanna Tambe</h3>
+          <p><strong>Teacher Member</strong></p>
+        </div>
+        <div class="card">
+          <h3>Dr. Amit Khatri</h3>
+          <p><strong>Teacher Member</strong></p>
+        </div>
+        <div class="card">
+          <h3>CS Charul Patel</h3>
+          <p><strong>Teacher Member</strong></p>
+        </div>
+        <div class="card">
+          <h3>Ms. Priti Thakkar</h3>
+          <p><strong>Teacher Member</strong></p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- NAAC CERTIFICATES PAGE -->
+  <div id="naac-certificates" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>NAAC Certificates</h1>
+      <p>Accreditation and Recognition</p>
+    </div>
+    <section>
+      <h2>NAAC Certificates</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- DEGREE STAFF PAGE -->
+  <div id="degree-staff" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Degree College Staff</h1>
+      <p>Our Academic Faculty</p>
+    </div>
+    <section>
+      <h2>Faculty Members</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- NON-TEACHING STAFF PAGE -->
+  <div id="non-teaching-staff" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Non-Teaching Staff</h1>
+      <p>Administrative Support Team</p>
+    </div>
+    <section>
+      <h2>Administrative Staff</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- STUDENT ACHIEVEMENTS PAGE -->
+  <div id="student-achievements" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Student Achievements</h1>
+      <p>Celebrating Student Excellence</p>
+    </div>
+    <section>
+      <h2>Recent Achievements</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- STAFF ACHIEVEMENTS PAGE -->
+  <div id="staff-achievements" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Staff Achievements</h1>
+      <p>Faculty Excellence and Recognition</p>
+    </div>
+    <section>
+      <h2>Faculty Achievements</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- CAREER COUNSELLING PAGE -->
+  <div id="career-counselling" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Career Counselling</h1>
+      <p>Guiding Your Professional Journey</p>
+    </div>
+    <section>
+      <h2>Career Guidance Services</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- PERSONAL COUNSELLING PAGE -->
+  <div id="personal-counselling" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Personal Counselling</h1>
+      <p>Supporting Student Well-being</p>
+    </div>
+    <section>
+      <h2>Counselling Services</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- AQAR PAGE -->
+  <div id="aqar" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>AQAR</h1>
+      <p>Annual Quality Assurance Report</p>
+    </div>
+    <section>
+      <h2>Annual Quality Assurance Reports</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- SSR PAGE -->
+  <div id="ssr" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>SSR</h1>
+      <p>Self Study Report</p>
+    </div>
+    <section>
+      <h2>Self Study Reports</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- STUDENT SATISFACTION SURVEY PAGE -->
+  <div id="student-satisfaction-survey" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Student Satisfaction Survey Reports</h1>
+      <p>Student Feedback and Satisfaction</p>
+    </div>
+    <section>
+      <h2>Survey Reports</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- MINUTES OF MEETINGS PAGE -->
+  <div id="minutes-meetings" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Minutes of Meetings</h1>
+      <p>IQAC Meeting Records</p>
+    </div>
+    <section>
+      <h2>Meeting Minutes</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- STRATEGIC PLAN PAGE -->
+  <div id="strategic-plan" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Strategic Plan & Development</h1>
+      <p>Institutional Planning and Development</p>
+    </div>
+    <section>
+      <h2>Strategic Plans</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- BEST PRACTICES PAGE -->
+  <div id="best-practices" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Best Practices</h1>
+      <p>Institutional Best Practices</p>
+    </div>
+    <section>
+      <h2>Best Practices</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- INSTITUTIONAL DISTINCTIVENESS PAGE -->
+  <div id="institutional-distinctiveness" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Institutional Distinctiveness</h1>
+      <p>Unique Features and Characteristics</p>
+    </div>
+    <section>
+      <h2>Distinctive Features</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- BRIDGE COURSES WELFARE PAGE -->
+  <div id="bridge-courses-welfare" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Bridge Courses</h1>
+      <p>Academic Support Programs</p>
+    </div>
+    <section>
+      <h2>Bridge Course Programs</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- YOGA AND MEDITATION PAGE -->
+  <div id="yoga-meditation" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Yoga and Meditation</h1>
+      <p>Wellness and Mental Health Programs</p>
+    </div>
+    <section>
+      <h2>Wellness Programs</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- SCHOLARSHIPS PAGE -->
+  <div id="scholarships" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Scholarships</h1>
+      <p>Financial Aid and Support</p>
+    </div>
+    <section>
+      <h2>Scholarship Programs</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- INSTITUTIONAL GOALS PAGE -->
+  <div id="institutional-goals" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Institutional Goals</h1>
+      <p>Our Vision and Mission</p>
+    </div>
+    <section>
+      <h2>Our Goals</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- FLOOR PLAN PAGE -->
+  <div id="floor-plan" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Floor Plan</h1>
+      <p>Campus Layout and Infrastructure</p>
+    </div>
+    <section>
+      <h2>Campus Floor Plan</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- FACILITIES PAGE -->
+  <div id="facilities" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Facilities</h1>
+      <p>Campus Infrastructure and Amenities</p>
+    </div>
+    <section>
+      <h2>Our Facilities</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ACCOLADES PAGE -->
+  <div id="accolades" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Accolades</h1>
+      <p>Recognition and Awards</p>
+    </div>
+    <section>
+      <h2>Our Achievements</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- WHAT THEY SAY PAGE -->
+  <div id="what-they-say" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>What They Say</h1>
+      <p>Testimonials and Reviews</p>
+    </div>
+    <section>
+      <h2>Testimonials</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ORGANOGRAM PAGE -->
+  <div id="organogram" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Organogram</h1>
+      <p>Organizational Structure</p>
+    </div>
+    <section>
+      <h2>Organization Chart</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- COURSES AND SYLLABUS PAGE -->
+  <div id="courses-syllabus" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Courses and Syllabus</h1>
+      <p>Detailed Course Information</p>
+    </div>
+    <section>
+      <h2>Course Syllabus</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- PROGRAM OUTCOMES PAGE -->
+  <div id="program-outcomes" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Program Outcomes</h1>
+      <p>Learning Objectives and Outcomes</p>
+    </div>
+    <section>
+      <h2>Learning Outcomes</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- FACULTY EXCHANGE PROGRAM PAGE -->
+  <div id="faculty-exchange" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Faculty Exchange Program</h1>
+      <p>International Academic Collaboration</p>
+    </div>
+    <section>
+      <h2>Exchange Programs</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ADD ON/SHORT TERM COURSES PAGE -->
+  <div id="addon-courses" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Add on/Short Term Courses</h1>
+      <p>Skill Enhancement Programs</p>
+    </div>
+    <section>
+      <h2>Short Term Courses</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- BRIDGE COURSES PAGE -->
+  <div id="bridge-courses" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Bridge Courses</h1>
+      <p>Foundation and Preparatory Programs</p>
+    </div>
+    <section>
+      <h2>Bridge Programs</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ACADEMIC CALENDAR PAGE -->
+  <div id="academic-calendar" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Academic Calendar</h1>
+      <p>Important Dates and Events</p>
+    </div>
+    <section>
+      <h2>Calendar</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ANNUAL REPORTS PAGE -->
+  <div id="annual-reports" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Annual Reports</h1>
+      <p>Yearly Performance and Activities</p>
+    </div>
+    <section>
+      <h2>Reports</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- MAJOR/MINOR PROJECTS PAGE -->
+  <div id="major-minor-projects" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Major/Minor Projects</h1>
+      <p>Research Projects and Initiatives</p>
+    </div>
+    <section>
+      <h2>Research Projects</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- PAPER PUBLICATIONS PAGE -->
+  <div id="paper-publications" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Paper Publications</h1>
+      <p>Academic Research Papers</p>
+    </div>
+    <section>
+      <h2>Published Papers</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- BOOKS AND CHAPTER PUBLICATIONS PAGE -->
+  <div id="books-publications" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Books and Chapter Publications</h1>
+      <p>Academic Books and Chapters</p>
+    </div>
+    <section>
+      <h2>Published Books</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- RESEARCH ORGANISATION PAGE -->
+  <div id="research-organisation" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Research Organisation</h1>
+      <p>Research Structure and Management</p>
+    </div>
+    <section>
+      <h2>Research Organization</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- RESEARCH SCHOLARS PAGE -->
+  <div id="research-scholars" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Research Scholars (PhD)</h1>
+      <p>Doctoral Research Students</p>
+    </div>
+    <section>
+      <h2>PhD Scholars</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- RESEARCH ACTIVITIES PAGE -->
+  <div id="research-activities" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Research Activities</h1>
+      <p>Ongoing Research Programs</p>
+    </div>
+    <section>
+      <h2>Research Activities</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- COMMITTEE EVENTS PAGE -->
+  <div id="committee-events" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Committee Events</h1>
+      <p>Committee Activities and Programs</p>
+    </div>
+    <section>
+      <h2>Committee Events</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- PHOTO GALLERY PAGE -->
+  <div id="photo-gallery" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Photo Gallery</h1>
+      <p>Memories and Moments</p>
+    </div>
+    <section>
+      <h2>Photo Gallery</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- CAPACITY DEVELOPMENT PAGE -->
+  <div id="capacity-development" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Capacity Development and Skills Enhancement</h1>
+      <p>Building Skills for Success</p>
+    </div>
+    <section>
+      <h2>Skills Enhancement Programs</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- CAREER GUIDANCE EVENTS PAGE -->
+  <div id="career-guidance-events" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Career Guidance</h1>
+      <p>Career Development Events</p>
+    </div>
+    <section>
+      <h2>Career Guidance Events</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- GENDER SENSITIZATION PAGE -->
+  <div id="gender-sensitization" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Gender Sensitization Plan</h1>
+      <p>Promoting Gender Equality</p>
+    </div>
+    <section>
+      <h2>Gender Sensitization Programs</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ENTREPRENEURSHIP CELL PAGE -->
+  <div id="entrepreneurship-cell" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Entrepreneurship Cell</h1>
+      <p>Fostering Innovation and Entrepreneurship</p>
+    </div>
+    <section>
+      <h2>Entrepreneurship Programs</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- MAGAZINE PAGE -->
+  <div id="magazine" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Magazine</h1>
+      <p>College Publications and Articles</p>
+    </div>
+    <section>
+      <h2>College Magazine</h2>
+      <div style="text-align: center; padding: 40px; color: #666;">
+        <p>Content will be updated soon.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- CONTACT PAGE -->
+  <div id="contact" class="page">
+    <div class="page-header">
+      <button class="back-arrow" onclick="showPage('home')">← Back</button>
+      <h1>Contact Us</h1>
+      <p>Get in Touch with SIES College</p>
+    </div>
+    <section>
+      <h2>Contact Information</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>📍 Address</h3>
+          <p>Plot No.71, 72, TV Chidambaran Marg,<br>
+          Air Force Quarters, Sion,<br>
+          Near Champaklal Industries,<br>
+          Mumbai, Maharashtra 400022<br>
+          INDIA</p>
+        </div>
+        
+        <div class="card">
+          <h3>📞 Phone</h3>
+          <p><strong>Main Office:</strong> +91-22-2407-4944</p>
+        </div>
+        
+        <div class="card">
+          <h3>📧 General Email</h3>
+          <p>siesce@sies.edu.in</p>
+        </div>
+        
+        <div class="card">
+          <h3>🕒 Office Hours</h3>
+          <p><strong>Mon-Fri:</strong> 9:00 AM - 5:00 PM<br>
+          <strong>Saturday:</strong> 9:00 AM - 1:00 PM<br>
+          <strong>Sunday:</strong> Closed</p>
+        </div>
+      </div>
+
+      <h2>Department Contacts</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Principal's Office</h3>
+          <p>📞 +91-22-2407-4944<br>📧 principalce@sies.edu.in<br>📧 shantii@sies.edu.in</p>
+        </div>
+        <div class="card">
+          <h3>Registrar</h3>
+          <p>📞 +91-22-2407-4944<br>📧 ankushs@sies.edu.in</p>
+        </div>
+        <div class="card">
+          <h3>Library</h3>
+          <p>📞 +91-22-2407-4944<br>📧 libraryce@sies.edu.in</p>
+        </div>
+        <div class="card">
+          <h3>General Inquiries</h3>
+          <p>📞 +91-22-2407-4944<br>📧 siesce@sies.edu.in</p>
+        </div>
+      </div>
+
+      <div class="form-container">
+        <h3>Send us a Message</h3>
+        <form>
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" required>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel">
+          </div>
+          <div class="form-group">
+            <label>Inquiry Category</label>
+            <select required>
+              <option value="">Select Category</option>
+              <option value="admissions">Admissions</option>
+              <option value="academics">Academics</option>
+              <option value="fees">Fees & Payments</option>
+              <option value="general">General Inquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" required>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea rows="5" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Contact Information</h3>
+        <p>📍 Plot No.71, 72, TV Chidambaran Marg, Air Force Quarters, Sion, Mumbai - 400022</p>
+        <p>📞 +91-22-2407-4944</p>
+        <p>📧 siesce@sies.edu.in</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a onclick="showPage('admissions')" style="font-weight: bold;">Admissions</a>
+        <a onclick="showPage('courses')" style="font-weight: bold;">Courses</a>
+        <a onclick="showPage('contact')" style="font-weight: bold;">Contact</a>
+        <a onclick="showPage('career-counselling')" style="font-weight: bold;">Career Counselling</a>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <a href="#facebook">Facebook</a>
+        <a href="#twitter">Twitter</a>
+        <a href="#linkedin">LinkedIn</a>
+        <a href="#instagram">Instagram</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 SIES College of Commerce & Economics. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.classList.toggle('active');
+    }
+
+    function showPage(pageId) {
+      // Hide all pages
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => {
+        page.classList.remove('active');
+      });
+      
+      // Show selected page
+      const targetPage = document.getElementById(pageId);
+      if (targetPage) {
+        targetPage.classList.add('active');
+      }
+      
+      // Close mobile menu if open
+      const menu = document.getElementById('menu');
+      menu.classList.remove('active');
+      
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+
+    // Form handling
+    document.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for your submission! We will get back to you soon.');
+      e.target.reset();
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('menu');
+      const hamburger = document.querySelector('.hamburger');
+      
+      if (!hamburger.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.remove('active');
+      }
+    });
+
+    // Course Details Data
+    const courseDetails = {
+      bcom: {
+        title: "Bachelor of Commerce (B.Com)",
+        description: "This is a foundational business degree that teaches you the basics of how businesses work. You'll learn about money management, accounting (keeping track of business finances), economics (how markets work), and general business principles.",
+        duration: "3 Years",
+        eligibility: [
+          "Completed 12th grade (HSC) from any recognized board",
+          "Minimum 45% marks in 12th grade (40% for reserved categories)",
+          "No specific subject requirements - students from any stream can apply"
+        ],
+        career: ["Accountant", "Financial Analyst", "Business Consultant", "Banking Professional", "Tax Consultant", "Government Jobs"]
+      },
+      bms: {
+        title: "Bachelor of Management Studies (BMS)",
+        description: "This program teaches you how to manage and lead teams, businesses, and organizations. You'll learn leadership skills, how to make business decisions, manage people, and understand different aspects of running a company.",
+        duration: "3 Years",
+        eligibility: [
+          "Completed 12th grade (HSC) from any recognized board",
+          "Minimum 45% marks in 12th grade (40% for reserved categories)",
+          "Open to students from all streams (Science, Commerce, Arts)"
+        ],
+        career: ["Manager", "Business Analyst", "HR Professional", "Marketing Executive", "Operations Manager", "Entrepreneur"]
+      },
+      bscit: {
+        title: "B.Sc. (Information Technology)",
+        description: "This is a technology-focused program where you'll learn computer programming, how to build websites and apps, manage databases, and understand how modern technology works. Perfect for those interested in the tech industry.",
+        duration: "3 Years",
+        eligibility: [
+          "Completed 12th grade (HSC) with Mathematics as a subject",
+          "Minimum 45% marks in 12th grade (40% for reserved categories)",
+          "Basic computer knowledge is helpful but not mandatory"
+        ],
+        career: ["Software Developer", "Web Developer", "Database Administrator", "IT Support Specialist", "System Analyst", "Cybersecurity Specialist"]
+      },
+      bcomaf: {
+        title: "B.Com (Accounting & Finance)",
+        description: "This specialized program focuses on money management and financial record-keeping. You'll learn advanced accounting techniques, how to analyze financial statements, and understand investment and finance principles.",
+        duration: "3 Years",
+        eligibility: [
+          "Completed 12th grade (HSC) preferably with Commerce stream",
+          "Minimum 45% marks in 12th grade (40% for reserved categories)",
+          "Basic mathematics knowledge required"
+        ],
+        career: ["Chartered Accountant", "Financial Advisor", "Investment Analyst", "Audit Assistant", "Tax Consultant", "Corporate Finance Professional"]
+      },
+      bcombi: {
+        title: "B.Com (Banking & Insurance)",
+        description: "This program teaches you about banking operations, insurance products, and financial services. You'll understand how banks work, different types of insurance, and how to help people with their financial needs.",
+        duration: "3 Years",
+        eligibility: [
+          "Completed 12th grade (HSC) from any recognized board",
+          "Minimum 45% marks in 12th grade (40% for reserved categories)",
+          "Interest in finance and customer service is beneficial"
+        ],
+        career: ["Bank Officer", "Insurance Agent", "Loan Officer", "Financial Services Representative", "Risk Analyst", "Investment Advisor"]
+      },
+      bcomfm: {
+        title: "B.Com (Financial Markets)",
+        description: "This program focuses on stock markets, trading, and investments. You'll learn how financial markets work, how to analyze stocks and bonds, and understand investment strategies.",
+        duration: "3 Years",
+        eligibility: [
+          "Completed 12th grade (HSC) preferably with Commerce or Science stream",
+          "Minimum 45% marks in 12th grade (40% for reserved categories)",
+          "Interest in stock markets and investments"
+        ],
+        career: ["Stock Broker", "Investment Analyst", "Portfolio Manager", "Financial Planner", "Market Research Analyst", "Trading Specialist"]
+      },
+      bcomhons: {
+        title: "B.Com Hons. (International Accounting)",
+        description: "This premium program teaches accounting standards used globally. You'll learn how multinational companies manage their finances and understand international business practices.",
+        duration: "3 Years",
+        eligibility: [
+          "Completed 12th grade (HSC) with minimum 60% marks",
+          "Strong academic background preferred",
+          "English proficiency required for international curriculum"
+        ],
+        career: ["International Accountant", "Global Financial Analyst", "Multinational Company Executive", "International Auditor", "Foreign Exchange Specialist"]
+      },
+      bscai: {
+        title: "B.Sc. (Artificial Intelligence)",
+        description: "This cutting-edge program teaches you about artificial intelligence, machine learning, and smart computer systems. You'll learn how to create intelligent software that can learn and make decisions.",
+        duration: "3 Years",
+        eligibility: [
+          "Completed 12th grade (HSC) with Mathematics and preferably Computer Science",
+          "Minimum 50% marks in 12th grade",
+          "Strong analytical and logical thinking skills"
+        ],
+        career: ["AI Developer", "Machine Learning Engineer", "Data Scientist", "AI Research Specialist", "Robotics Engineer", "Tech Consultant"]
+      },
+      mcomacc: {
+        title: "M.Com (Accountancy)",
+        description: "This advanced program deepens your knowledge of accounting principles, auditing, and financial reporting. You'll become an expert in managing complex financial records and understanding advanced accounting standards.",
+        duration: "2 Years",
+        eligibility: [
+          "Bachelor's degree in Commerce or related field",
+          "Minimum 50% marks in graduation (45% for reserved categories)",
+          "Background in accounting subjects preferred"
+        ],
+        career: ["Senior Accountant", "Audit Manager", "Financial Controller", "Tax Expert", "Accounting Professor", "CFO (with experience)"]
+      },
+      mcombf: {
+        title: "M.Com (Banking & Finance)",
+        description: "This program provides advanced knowledge of banking operations, financial markets, and investment management. You'll understand complex financial instruments and modern banking practices.",
+        duration: "2 Years",
+        eligibility: [
+          "Bachelor's degree in Commerce, Economics, or related field",
+          "Minimum 50% marks in graduation (45% for reserved categories)",
+          "Basic understanding of finance concepts"
+        ],
+        career: ["Bank Manager", "Investment Manager", "Financial Analyst", "Credit Manager", "Treasury Officer", "Financial Consultant"]
+      },
+      mscit: {
+        title: "M.Sc (Information Technology)",
+        description: "This advanced IT program covers sophisticated programming, software engineering, and emerging technologies. You'll learn to design and manage complex computer systems and applications.",
+        duration: "2 Years",
+        eligibility: [
+          "Bachelor's degree in IT, Computer Science, or related field",
+          "Minimum 50% marks in graduation (45% for reserved categories)",
+          "Programming knowledge and technical aptitude required"
+        ],
+        career: ["Senior Software Developer", "IT Project Manager", "Systems Architect", "Technical Lead", "IT Consultant", "Research Scientist"]
+      },
+      mscds: {
+        title: "M.Sc (Data Science)",
+        description: "This program teaches you to analyze large amounts of data to find patterns and insights. You'll learn statistical methods, programming, and how to help businesses make data-driven decisions.",
+        duration: "2 Years",
+        eligibility: [
+          "Bachelor's degree in any field with Mathematics/Statistics",
+          "Minimum 50% marks in graduation (45% for reserved categories)",
+          "Basic programming knowledge preferred"
+        ],
+        career: ["Data Scientist", "Data Analyst", "Business Intelligence Analyst", "Machine Learning Engineer", "Research Analyst", "Quantitative Analyst"]
+      },
+      mcomgwm: {
+        title: "M.Com (Global Wealth Management)",
+        description: "This specialized program teaches you how to manage wealth for high-net-worth individuals and institutions on a global scale. You'll learn international investment strategies and wealth preservation techniques.",
+        duration: "2 Years",
+        eligibility: [
+          "Bachelor's degree in Commerce, Finance, or related field",
+          "Minimum 50% marks in graduation (45% for reserved categories)",
+          "Interest in international finance and investments"
+        ],
+        career: ["Wealth Manager", "Private Banker", "Investment Advisor", "Portfolio Manager", "Financial Planner", "Relationship Manager"]
+      },
+      mcomfrta: {
+        title: "M.Com (Financial Research & Technical Analysis)",
+        description: "This program focuses on researching financial markets and analyzing price patterns to predict market movements. You'll learn advanced techniques used by professional traders and analysts.",
+        duration: "2 Years",
+        eligibility: [
+          "Bachelor's degree in Commerce, Finance, or Economics",
+          "Minimum 50% marks in graduation (45% for reserved categories)",
+          "Interest in financial markets and analytical thinking"
+        ],
+        career: ["Research Analyst", "Technical Analyst", "Investment Researcher", "Market Strategist", "Fund Manager", "Financial Advisor"]
+      },
+      mcombm: {
+        title: "M.Com (Business Management)",
+        description: "This program combines commerce knowledge with advanced management skills. You'll learn strategic planning, organizational behavior, and how to lead businesses effectively in today's competitive environment.",
+        duration: "2 Years",
+        eligibility: [
+          "Bachelor's degree in any field",
+          "Minimum 50% marks in graduation (45% for reserved categories)",
+          "Leadership potential and communication skills"
+        ],
+        career: ["Business Manager", "Operations Manager", "Strategy Consultant", "Project Manager", "Business Development Manager", "General Manager"]
+      },
+      phd: {
+        title: "Ph.D. (Commerce)",
+        description: "This is the highest academic degree where you conduct original research in commerce, economics, or business. You'll contribute new knowledge to your field and become an expert researcher and scholar.",
+        duration: "3-5 Years",
+        eligibility: [
+          "Master's degree in Commerce or related field with minimum 55% marks",
+          "Cleared UGC NET/JRF or equivalent examination",
+          "Research aptitude and strong academic background",
+          "Entrance test and interview may be required"
+        ],
+        career: ["Professor", "Research Scientist", "Policy Advisor", "Think Tank Researcher", "Academic Administrator", "Industry Research Head"]
+      }
+    };
+
+    // Show Course Details Function
+    function showCourseDetails(courseId) {
+      const course = courseDetails[courseId];
+      if (!course) return;
+
+      const content = `
+        <div class="course-detail">
+          <h2>${course.title}</h2>
+          <p><strong>Duration:</strong> ${course.duration}</p>
+          
+          <h3>What is this program about?</h3>
+          <p>${course.description}</p>
+          
+          <h3>Who can apply?</h3>
+          <ul>
+            ${course.eligibility.map(item => `<li>${item}</li>`).join('')}
+          </ul>
+          
+          <h3>Career opportunities after graduation:</h3>
+          <ul>
+            ${course.career.map(item => `<li>${item}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+
+      document.getElementById('courseDetailsContent').innerHTML = content;
+      document.getElementById('courseModal').style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    // Close Course Details Function
+    function closeCourseDetails() {
+      document.getElementById('courseModal').style.display = 'none';
+      document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeCourseDetails();
+      }
+    });
+
+    // YouTube Video Function
+    function openYouTubeVideo() {
+      const youtubeURL = 'https://youtu.be/Wq39bfckdFQ';
+      try {
+        window.open(youtubeURL, '_blank', 'noopener,noreferrer');
+      } catch (error) {
+        // Fallback: try direct navigation
+        window.location.href = youtubeURL;
+      }
+    }
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97416e5c326cc795',t:'MTc1NjAyMzYzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
